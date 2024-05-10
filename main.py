@@ -5,14 +5,15 @@ from PyQt6.QtGui import QIcon, QPixmap, QFont
 
 # import ui class
 from main_ui import Ui_MainWindow
-
+# cac ham tinh toan
+from solveEquation import solve
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.init_variable()
+        # self.init_variable()
         # list of button
         self.btn_list = self.ui.frame_2.findChildren(QPushButton)
         for button in self.btn_list:
@@ -20,25 +21,26 @@ class MainWindow(QMainWindow):
         for button in self.btn_list:
             button.clicked.connect(self.num_operand_click)
 
-        # equation
+        # equation and ans
+        self.resultfield = self.ui.resultfield
         self.outputfield = self.ui.outputfield
         self.equation = ''
         self.outputfield.textChanged.connect(self.update_equation)
-    def init_variable(self):
-        self.plus = self.ui.plus
-        self.minus = self.ui.minus
-        self.multiple = self.ui.multiple
-        self.divide = self.ui.multiple
-        self.power = self.ui.power
-        self.sqrt = self.ui.sqrt
-        self.varx = self.ui.varx
-        self.sin = self.ui.sin
-        self.cos = self.ui.cos
-        self.abs = self.ui.abs
-        # other
-        self.delete = self.ui.delete_2
-        self.ac = self.ui.ac
-        self.solve = self.ui.solve
+    # def init_variable(self):
+    #     self.plus = self.ui.plus
+    #     self.minus = self.ui.minus
+    #     self.multiple = self.ui.multiple
+    #     self.divide = self.ui.multiple
+    #     self.power = self.ui.power
+    #     self.sqrt = self.ui.sqrt
+    #     self.varx = self.ui.varx
+    #     self.sin = self.ui.sin
+    #     self.cos = self.ui.cos
+    #     self.abs = self.ui.abs
+    #     # other
+    #     self.delete = self.ui.delete_2
+    #     self.ac = self.ui.ac
+    #     self.solve = self.ui.solve
 
     def num_operand_click(self):
         button = self.sender()
@@ -60,7 +62,12 @@ class MainWindow(QMainWindow):
             self.equation = ''
             self.outputfield.setText('')
         elif text == 'Solve':
-            pass
+            solve(self.equation)
+            best_fitness, solution = solve(self.equation)
+            print("Best Fitness:", best_fitness)
+            print("Solution:", solution)
+            result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
+            self.ui.resultfield.setText(result_text)
         else:
             # add if its just num or regular operand
             self.equation += text

@@ -1,11 +1,19 @@
 import random
-import math
+from math import *
 
 INF = 999
 
 #ham muc tieu func(x) de danh gia cac ca the, cang gan 0 cang tot
-def func(x):
-    return abs(2 * x + 5 - 10 - math.sin(x) + x ** 2) # input o day... abs(expresion)
+def func(x, equation):
+    try:
+        # Evaluate the equation using the input value of x
+        result = eval(equation)
+        # print(result)
+        return abs(result)  # Return the absolute value of the result
+    except:
+        # Handle any exceptions that occur during evaluation
+        return INF  # Return a high value to penalize invalid equations or inputs
+
 #chuyen doi tu nhi phan sang thap phan
 def ieee_to_decimal(ieee_binary):
     long_value = int(ieee_binary, 2)
@@ -62,8 +70,8 @@ def mutate(individual, mutation_rate):
     return individual
 
 
-def main():
-    max_generation = 20
+def solve(equation):
+    max_generation = 10
     population_size = 10000
     population = init_population(population_size)
     best_fitness = INF
@@ -71,12 +79,12 @@ def main():
     generation = 0
 
     while generation < max_generation:
-        mutation_rate = 0.1 * (max_generation - generation) / max_generation
+        mutation_rate = 0.05 * (max_generation - generation) / max_generation
 
         func_val = []
 
         for individual in population:
-            fitness = func(ieee_to_decimal(individual))
+            fitness = func(ieee_to_decimal(individual), equation)
             func_val.append((individual, fitness))
 
         func_val.sort(key=lambda x: x[1])
@@ -98,14 +106,13 @@ def main():
         generation += 1
 
     for individual in population:
-        current_fitness = func(ieee_to_decimal(individual))
+        current_fitness = func(ieee_to_decimal(individual), equation)
         if current_fitness < best_fitness:
             best_fitness = current_fitness
             solution = ieee_to_decimal(individual)
 
-    print("Best Fitness:", best_fitness)
-    print("Solution:", solution)
-
-
-if __name__ == "__main__":
-    main()
+    # print("Best Fitness:", best_fitness)
+    # print("Solution:", solution)
+    return best_fitness, solution
+# if __name__ == "__main__":
+#     main()
