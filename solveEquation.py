@@ -78,6 +78,9 @@ def solve(equation):
     solution = 0
     generation = 0
 
+    best_fitness_list = []  # List to store best fitness values
+    solution_list = []  # List to store corresponding solutions
+
     while generation < max_generation:
         mutation_rate = 0.05 * (max_generation - generation) / max_generation
 
@@ -110,9 +113,11 @@ def solve(equation):
         if current_fitness < best_fitness:
             best_fitness = current_fitness
             solution = ieee_to_decimal(individual)
+            best_fitness_list.append(best_fitness)
+            solution_list.append(solution)
 
     # print("Best Fitness:", best_fitness)
     # print("Solution:", solution)
-    return best_fitness, solution
+    return best_fitness_list, solution_list
 # if __name__ == "__main__":
 #     main()

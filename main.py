@@ -5,6 +5,7 @@ from PyQt6.QtGui import QIcon, QPixmap, QFont
 
 # import ui class
 from main_ui import Ui_MainWindow
+from xem_info import GraphWidget
 # cac ham tinh toan
 from solveEquation import solve
 class MainWindow(QMainWindow):
@@ -14,10 +15,13 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         self.init_variable()
+        #cac ket qua tinh toan
+        self.best_fitness_list = ''
+        self.solution_list = ''
         # list of button
         self.btn_list = self.ui.frame_2.findChildren(QPushButton)
         # for button in self.btn_list:
-        #     print(button.text())
+            # print(button.text())
         for button in self.btn_list:
             button.clicked.connect(self.num_operand_click)
 
@@ -26,6 +30,9 @@ class MainWindow(QMainWindow):
         self.outputfield = self.ui.outputfield
         self.equation = ''
         self.outputfield.textChanged.connect(self.update_equation)
+
+        # Create GraphWidget instance
+        self.graph_widget = GraphWidget()
     def init_variable(self):
         self.info = self.ui.info
 
@@ -52,7 +59,11 @@ class MainWindow(QMainWindow):
         elif text == 'Solve':
             self.equation = self.equation.replace('^', '**')
             solve(self.equation)
-            best_fitness, solution = solve(self.equation)
+            self.best_fitness_list, self.solution_list = solve(self.equation)
+            print(self.best_fitness_list)
+            print(self.solution_list )
+            best_fitness = self.best_fitness_list[-1]
+            solution = self.solution_list[-1]
             print("Best Fitness:", best_fitness)
             print("Solution:", solution)
             if best_fitness == 999:
@@ -60,6 +71,10 @@ class MainWindow(QMainWindow):
             else:
                 result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
             self.ui.resultfield.setText(result_text)
+        elif text == 'Xem info':
+            pass
+            self.graph_widget.draw_fitness_graph(self.best_fitness_list, self.solution_list)
+            self.graph_widget.show()
         else:
             # add if its just num or regular operand
             self.equation += text
