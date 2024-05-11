@@ -13,11 +13,11 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        # self.init_variable()
+        self.init_variable()
         # list of button
         self.btn_list = self.ui.frame_2.findChildren(QPushButton)
-        for button in self.btn_list:
-            print(button.text())
+        # for button in self.btn_list:
+        #     print(button.text())
         for button in self.btn_list:
             button.clicked.connect(self.num_operand_click)
 
@@ -26,21 +26,8 @@ class MainWindow(QMainWindow):
         self.outputfield = self.ui.outputfield
         self.equation = ''
         self.outputfield.textChanged.connect(self.update_equation)
-    # def init_variable(self):
-    #     self.plus = self.ui.plus
-    #     self.minus = self.ui.minus
-    #     self.multiple = self.ui.multiple
-    #     self.divide = self.ui.multiple
-    #     self.power = self.ui.power
-    #     self.sqrt = self.ui.sqrt
-    #     self.varx = self.ui.varx
-    #     self.sin = self.ui.sin
-    #     self.cos = self.ui.cos
-    #     self.abs = self.ui.abs
-    #     # other
-    #     self.delete = self.ui.delete_2
-    #     self.ac = self.ui.ac
-    #     self.solve = self.ui.solve
+    def init_variable(self):
+        self.info = self.ui.info
 
     def num_operand_click(self):
         button = self.sender()
@@ -61,12 +48,17 @@ class MainWindow(QMainWindow):
         elif text == 'AC':
             self.equation = ''
             self.outputfield.setText('')
+            self.ui.resultfield.setText('')
         elif text == 'Solve':
+            self.equation = self.equation.replace('^', '**')
             solve(self.equation)
             best_fitness, solution = solve(self.equation)
             print("Best Fitness:", best_fitness)
             print("Solution:", solution)
-            result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
+            if best_fitness == 999:
+                result_text = "FUNC ERR"
+            else:
+                result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
             self.ui.resultfield.setText(result_text)
         else:
             # add if its just num or regular operand

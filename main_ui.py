@@ -14,11 +14,7 @@ class Ui_MainWindow(object):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(656, 501)
         MainWindow.setMinimumSize(QtCore.QSize(0, 50))
-        MainWindow.setStyleSheet("#centralwidget{\n"
-"    \n"
-"    \n"
-"}\n"
-"QFrame{    \n"
+        MainWindow.setStyleSheet("QFrame{    \n"
 "    background-color:#333\n"
 "    \n"
 "}\n"
@@ -29,6 +25,14 @@ class Ui_MainWindow(object):
 "}\n"
 "QLineEdit{\n"
 "    font-size:30px;\n"
+"    font-family:\"Helvetica\";\n"
+"    background-color:#333;\n"
+"    border: 2px solid black;\n"
+"    border-radius: 5px;\n"
+"    color:#fff;\n"
+"}\n"
+"QTextEdit{\n"
+"    font-size:20px;\n"
 "    font-family:\"Helvetica\";\n"
 "    background-color:#333;\n"
 "    border: 2px solid black;\n"
@@ -207,12 +211,8 @@ class Ui_MainWindow(object):
         self.sin.setMinimumSize(QtCore.QSize(0, 40))
         self.sin.setObjectName("sin")
         self.gridLayout_2.addWidget(self.sin, 1, 0, 1, 1)
-        self.resultfield = QtWidgets.QLineEdit(parent=self.frame_2)
-        self.resultfield.setGeometry(QtCore.QRect(400, 40, 221, 91))
-        self.resultfield.setText("")
-        self.resultfield.setObjectName("resultfield")
         self.label_2 = QtWidgets.QLabel(parent=self.frame_2)
-        self.label_2.setGeometry(QtCore.QRect(480, 10, 81, 20))
+        self.label_2.setGeometry(QtCore.QRect(470, 0, 81, 20))
         self.label_2.setObjectName("label_2")
         self.info = QtWidgets.QPushButton(parent=self.frame_2)
         self.info.setGeometry(QtCore.QRect(450, 140, 121, 28))
@@ -241,6 +241,9 @@ class Ui_MainWindow(object):
         self.solve.setStyleSheet("background-color:#ff6600;")
         self.solve.setObjectName("solve")
         self.horizontalLayout.addWidget(self.solve)
+        self.resultfield = QtWidgets.QTextEdit(parent=self.frame_2)
+        self.resultfield.setGeometry(QtCore.QRect(383, 30, 251, 111))
+        self.resultfield.setObjectName("resultfield")
         self.verticalLayout_2.addWidget(self.frame_2)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)

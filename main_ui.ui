@@ -20,11 +20,7 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#centralwidget{
-	
-	
-}
-QFrame{	
+   <string notr="true">QFrame{	
 	background-color:#333
 	
 }
@@ -35,6 +31,14 @@ QLabel{
 }
 QLineEdit{
 	font-size:30px;
+	font-family:&quot;Helvetica&quot;;
+	background-color:#333;
+	border: 2px solid black;
+	border-radius: 5px;
+	color:#fff;
+}
+QTextEdit{
+	font-size:20px;
 	font-family:&quot;Helvetica&quot;;
 	background-color:#333;
 	border: 2px solid black;
@@ -546,24 +550,11 @@ QLineEdit{
         </item>
        </layout>
       </widget>
-      <widget class="QLineEdit" name="resultfield">
-       <property name="geometry">
-        <rect>
-         <x>400</x>
-         <y>40</y>
-         <width>221</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>480</x>
-         <y>10</y>
+         <x>470</x>
+         <y>0</y>
          <width>81</width>
          <height>20</height>
         </rect>
@@ -654,6 +645,16 @@ color:#000000</string>
          </widget>
         </item>
        </layout>
+      </widget>
+      <widget class="QTextEdit" name="resultfield">
+       <property name="geometry">
+        <rect>
+         <x>383</x>
+         <y>30</y>
+         <width>251</width>
+         <height>111</height>
+        </rect>
+       </property>
       </widget>
      </widget>
     </item>
