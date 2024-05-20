@@ -88,6 +88,8 @@ def solve(equation):
 
         for individual in population:
             fitness = func(ieee_to_decimal(individual), equation)
+            if fitness == INF:
+                return [INF], [INF]
             func_val.append((individual, fitness))
 
         func_val.sort(key=lambda x: x[1])
