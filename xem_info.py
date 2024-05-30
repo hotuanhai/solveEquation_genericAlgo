@@ -21,9 +21,9 @@ class GraphWidget(QWidget):
 
         # vẽ đồ thị với
         # best_fitness_list ở trục y và solution_listo ở trục x
-        self.ax.plot(best_fitness_list, solution_list, marker='o')
-        self.ax.set_xlabel('Best Fitness')
-        self.ax.set_ylabel('Solution')
+        self.ax.plot(solution_list,best_fitness_list , marker='o')
+        self.ax.set_xlabel('Solution')
+        self.ax.set_ylabel('Best Fitness')
         self.ax.set_title('Solution vs. Best Fitness')
 
         # Điều chỉnh khoảng cách bố cục

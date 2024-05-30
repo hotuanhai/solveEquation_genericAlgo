@@ -93,6 +93,15 @@ def solve(equation):
             func_val.append((individual, fitness))
 
         func_val.sort(key=lambda x: x[1])
+        # thêm các giá trị tốt nhất tại mỗi thế hệ
+        best_individual, best_fitness = func_val[0]
+
+        # Convert the best individual from binary to decimal
+        best_solution = ieee_to_decimal(best_individual)
+
+        # Add to the lists
+        best_fitness_list.append(best_fitness)
+        solution_list.append(best_solution)
 
         new_population_size = population_size // 4
         new_population = [x[0] for x in func_val[:new_population_size]]
