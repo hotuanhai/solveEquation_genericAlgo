@@ -6,6 +6,8 @@ from main_ui import Ui_MainWindow
 from xem_info import GraphWidget
 # cac ham tinh toan
 from solveEquation import solve
+
+INF = 999
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -81,10 +83,10 @@ class MainWindow(QMainWindow):
             solution = self.solution_list[-1]
             print("Best Fitness:", best_fitness)
             print("Solution:", solution)
-            if best_fitness == 999:
-                result_text = "FUNC ERR"
-            else:
-                result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
+            # if best_fitness == INF:
+            #     result_text = "FUNC ERR"
+            # else:
+            result_text = "Best Fitness: {}\nSolution: {}".format(best_fitness, solution)
             self.ui.resultfield.setText(result_text)
         # Xem info giúp ta thấy được các kết quả được xét cùng fitness tương ứng dưới dạng đồ thị
         elif text == 'Xem info':

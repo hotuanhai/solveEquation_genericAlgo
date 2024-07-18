@@ -5,10 +5,11 @@ INF = 999
 
 #ham muc tieu func(x) de danh gia cac ca the, cang gan 0 cang tot
 def func(x, equation):
+    # print(equation)
     try:
         # Evaluate the equation using the input value of x
         result = eval(equation)
-        # print(result)
+
         return abs(result)  # Return the absolute value of the result
     except:
         # Handle any exceptions that occur during evaluation
@@ -88,8 +89,8 @@ def solve(equation):
 
         for individual in population:
             fitness = func(ieee_to_decimal(individual), equation)
-            if fitness == INF:
-                return [INF], [INF]
+            # if fitness == INF:
+            #     return [INF], [INF]
             func_val.append((individual, fitness))
 
         func_val.sort(key=lambda x: x[1])
